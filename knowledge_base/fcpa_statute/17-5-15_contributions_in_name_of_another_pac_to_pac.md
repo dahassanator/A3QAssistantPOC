@@ -1,0 +1,15 @@
+---
+title: "Ala. Code § 17-5-15 - Contributions by One Person in Name of Another; Contributions Between Political Action Committees, Etc."
+source: "Code of Alabama 1975, Title 17 (Elections), Chapter 5 (The Fair Campaign Practices Act)"
+description: "Statutory text: straw-donor ban and the PAC-to-PAC transfer ban, including the PCC and 527 rules"
+source_url: "https://law.justia.com/codes/alabama/title-17/chapter-5/section-17-5-15/"
+converted: 2026-09-18
+---
+
+# Ala. Code § 17-5-15 - Contributions by One Person in Name of Another; Contributions Between Political Action Committees, Etc.
+
+(a) It shall be unlawful for any person, acting for himself or herself or on behalf of any entity, to make a contribution in the name of another person or entity, or knowingly permit his or her name, or the entity's name, to be used to effect such a contribution made by one person or entity in the name of another person or entity, or for any candidate, principal campaign committee, or political action committee to knowingly accept a contribution made by one person or entity in the name of another person or entity; provided, however, that nothing in this chapter prohibits any person from soliciting and receiving contributions from other persons for the purpose of making expenditures to a candidate, political campaign committee, political action committee, or elected state or local official required to file reports pursuant to Section 17-5-8.
+
+(b) It shall be unlawful for any political action committee or tax exempt political organization under 26 U.S.C. § 527, including a principal campaign committee, or any person authorized to make an expenditure on behalf of such political action committee or 527 organization, to make a contribution, expenditure, or any other transfer of funds to any other political action committee or 527 organization. It shall be unlawful for any principal campaign committee or any person authorized to make an expenditure on behalf of such principal campaign committee to make a contribution, expenditure, or other transfer of funds to any other principal campaign committee, except where the contribution, expenditure, or any other transfer of funds is made from a principal campaign committee to another principal campaign committee on behalf of the same person. Notwithstanding the foregoing, a political action committee that is not a principal campaign committee may make contributions, expenditures, or other transfers of funds to a principal campaign committee; and a separate segregated fund established by a corporation under federal law, if the fund does not receive any contributions from within this state other than contributions from its employees and directors, is not restricted by this subsection in the amount it may transfer to a political action committee established under the provisions of Section 17-5-14.1 by the same or an affiliated corporation.
+
+History: Acts 1988, 1st Ex. Sess., No. 88-873, p. 397, §18; §17-22A-18; amended and renumbered by Act 2006-570, p. 1331, §24; Act 2010-765, 1st Sp. Sess., p. 38, §2; Act 2013-311, p. 1060, §1.

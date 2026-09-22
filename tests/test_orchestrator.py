@@ -22,5 +22,8 @@ def test_handle_question_calls_claude_and_returns_text():
     assert kwargs["model"] == "claude-haiku-4-5"
     assert "Alabama" in kwargs["system"]
     assert kwargs["messages"] == [
-        {"role": "user", "content": "What's a canvassing contact?"}
+        {
+            "role": "user",
+            "content": "<user_message>\nWhat's a canvassing contact?\n</user_message>",
+        }
     ]

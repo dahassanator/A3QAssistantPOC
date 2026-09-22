@@ -26,13 +26,19 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 if question := st.chat_input("Ask a compliance, how-to, or terminology question..."):
-    st.session_state.messages.append({"role": "user", "content": question})
+    # Streamlit's markdown renderer treats single `$...$` as inline LaTeX math,
+    # which garbles dollar-amount citations (e.g. "$100 ... $5,000") into
+    # broken math blocks. Escape before display only - the backend safety
+    # checks (PII redaction, injection detection) run on the raw question.
+    displayed_question = question.replace("$", "\\$")
+    st.session_state.messages.append({"role": "user", "content": displayed_question})
     with st.chat_message("user"):
-        st.markdown(question)
+        st.markdown(displayed_question)
 
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             answer = handle_question(question, get_default_campaign_context())
-        st.markdown(answer.text)
+        displayed_answer = answer.text.replace("$", "\\$")
+        st.markdown(displayed_answer)
 
-    st.session_state.messages.append({"role": "assistant", "content": answer.text})
+    st.session_state.messages.append({"role": "assistant", "content": displayed_answer})

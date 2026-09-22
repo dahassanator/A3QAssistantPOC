@@ -65,7 +65,8 @@ def test_opinion_or_advice_question_is_declined_with_canned_message():
 
 def test_pii_in_question_never_reaches_claude_and_is_flagged():
     final = MagicMock(
-        stop_reason="end_turn", content=[MagicMock(type="text", text="Got it.")]
+        stop_reason="tool_use",
+        content=[_tool_use("provide_answer", {"text": "Got it."})],
     )
     client = MagicMock()
     client.messages.create.return_value = final
@@ -85,25 +86,33 @@ def test_pii_in_question_never_reaches_claude_and_is_flagged():
     assert "Social Security number" in answer.text
 
 
-def test_compliance_category_top_result_adds_disclaimer():
+def test_answer_citing_a_statute_gets_the_disclaimer():
+    """Disclaimer detection reads the model's own final text, not retrieval
+    rank - a search call's top hit is often a general glossary term (it's
+    the closest semantic match) even when a lower-ranked passage from the
+    actual statute is what the answer draws on, so inferring "compliance"
+    from rank alone under- and over-triggers. Checking the final text for
+    an actual citation is the direct signal.
+    """
     tool_use = _tool_use(
         "search_knowledge_base", {"query": "legislative blackout period"}
     )
     first = MagicMock(stop_reason="tool_use", content=[tool_use])
     final = MagicMock(
-        stop_reason="end_turn",
-        content=[MagicMock(type="text", text="You can't accept contributions then.")],
+        stop_reason="tool_use",
+        content=[
+            _tool_use(
+                "provide_answer",
+                {"text": "You can't accept contributions then, per § 17-5-7(b)(2)."},
+            )
+        ],
     )
     client = MagicMock()
     client.messages.create.side_effect = [first, final]
 
     fake_kb = MagicMock()
     fake_kb.search.return_value = [
-        Passage(
-            text="...",
-            source="fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md",
-            category="fcpa_statute",
-        )
+        Passage(text="...", source="glossary/contribution-limit.md", category="glossary")
     ]
 
     answer = handle_question(
@@ -117,12 +126,16 @@ def test_compliance_category_top_result_adds_disclaimer():
     assert answer.text.endswith(COMPLIANCE_DISCLAIMER)
 
 
-def test_glossary_top_result_does_not_add_disclaimer():
+def test_answer_without_a_statute_citation_has_no_disclaimer():
     tool_use = _tool_use("search_knowledge_base", {"query": "what is a PAC"})
     first = MagicMock(stop_reason="tool_use", content=[tool_use])
     final = MagicMock(
-        stop_reason="end_turn",
-        content=[MagicMock(type="text", text="A PAC is a political action committee.")],
+        stop_reason="tool_use",
+        content=[
+            _tool_use(
+                "provide_answer", {"text": "A PAC is a political action committee."}
+            )
+        ],
     )
     client = MagicMock()
     client.messages.create.side_effect = [first, final]

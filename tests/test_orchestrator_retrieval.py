@@ -12,12 +12,14 @@ def kb(tmp_path_factory):
 
 
 def _scripted_client(search_query: str, final_text: str):
-    tool_use = MagicMock(type="tool_use", id="toolu_1", input={"query": search_query})
-    tool_use.name = "search_knowledge_base"
-    first = MagicMock(stop_reason="tool_use", content=[tool_use])
-    final = MagicMock(
-        stop_reason="end_turn", content=[MagicMock(type="text", text=final_text)]
-    )
+    search_call = MagicMock(type="tool_use", id="toolu_1", input={"query": search_query})
+    search_call.name = "search_knowledge_base"
+    first = MagicMock(stop_reason="tool_use", content=[search_call])
+
+    answer_call = MagicMock(type="tool_use", id="toolu_2", input={"text": final_text})
+    answer_call.name = "provide_answer"
+    final = MagicMock(stop_reason="tool_use", content=[answer_call])
+
     client = MagicMock()
     client.messages.create.side_effect = [first, final]
     return client

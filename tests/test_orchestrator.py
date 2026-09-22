@@ -4,8 +4,9 @@ from assistant.orchestrator import AssistantAnswer, handle_question
 
 
 def test_handle_question_calls_claude_and_returns_text():
-    fake_text_block = MagicMock(type="text", text="You're all set.")
-    fake_response = MagicMock(content=[fake_text_block])
+    tool_use = MagicMock(type="tool_use", id="toolu_1", input={"text": "You're all set."})
+    tool_use.name = "provide_answer"
+    fake_response = MagicMock(content=[tool_use])
     fake_client = MagicMock()
     fake_client.messages.create.return_value = fake_response
 

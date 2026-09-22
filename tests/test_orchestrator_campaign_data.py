@@ -23,8 +23,8 @@ def test_data_tool_call_returns_computed_figures_not_a_citation(kb):
     tool_use = _tool_use("get_contributions", {"donor": "Pete Wallace"})
     first = MagicMock(stop_reason="tool_use", content=[tool_use])
     final = MagicMock(
-        stop_reason="end_turn",
-        content=[MagicMock(type="text", text="That donor gave $1,200 total.")],
+        stop_reason="tool_use",
+        content=[_tool_use("provide_answer", {"text": "That donor gave $1,200 total."})],
     )
     client = MagicMock()
     client.messages.create.side_effect = [first, final]
@@ -55,8 +55,8 @@ def test_combined_statute_and_data_tool_round_merges_both_results(kb):
     )
     first = MagicMock(stop_reason="tool_use", content=[search_call, data_call])
     final = MagicMock(
-        stop_reason="end_turn",
-        content=[MagicMock(type="text", text="Yes, that's $200 over the cap.")],
+        stop_reason="tool_use",
+        content=[_tool_use("provide_answer", {"text": "Yes, that's $200 over the cap."})],
     )
     client = MagicMock()
     client.messages.create.side_effect = [first, final]

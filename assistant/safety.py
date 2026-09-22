@@ -125,3 +125,23 @@ COMPLIANCE_DISCLAIMER = (
     "not legal advice. For guidance on your specific situation, consult "
     "your campaign's attorney or compliance officer.*"
 )
+
+_STATUTE_CITATION_RE = re.compile(
+    r"§\s*\d|Ala\.?\s*Code|Code of Alabama", re.IGNORECASE
+)
+
+
+def cites_alabama_statute(text: str) -> bool:
+    """True if the answer text itself cites an Alabama statute.
+
+    Used to decide whether to attach COMPLIANCE_DISCLAIMER. Earlier this
+    was inferred from retrieval - whether a search call's top-ranked
+    passage came from a law category - but that's rank noise: a query like
+    "cap on a federal committee's contribution" can rank the glossary's
+    general "contribution-limit" definition above the specific statute
+    that actually answers it, giving a false negative, while an unrelated
+    query can drag in stray statute passages ranked just below the correct
+    glossary hit, giving a false positive. Checking what the model's own
+    answer actually cites is the direct signal instead of a proxy for it.
+    """
+    return bool(_STATUTE_CITATION_RE.search(text))

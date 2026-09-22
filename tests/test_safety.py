@@ -1,6 +1,7 @@
 from assistant.safety import (
     COMPLIANCE_DISCLAIMER,
     REFUSAL_MESSAGES,
+    cites_alabama_statute,
     detect_prompt_injection,
     pii_notice,
     redact_pii,
@@ -107,3 +108,15 @@ def test_detect_prompt_injection_does_not_false_positive_on_ordinary_questions()
 
 def test_compliance_disclaimer_mentions_not_legal_advice():
     assert "not legal advice" in COMPLIANCE_DISCLAIMER
+
+
+def test_cites_alabama_statute_detects_section_symbol():
+    assert cites_alabama_statute("Under § 17-5-7(b)(2), you may not...")
+
+
+def test_cites_alabama_statute_detects_ala_code_phrasing():
+    assert cites_alabama_statute("Ala. Code 17-5-15.1 caps this at $1,000.")
+
+
+def test_cites_alabama_statute_false_on_ordinary_answer():
+    assert not cites_alabama_statute("A PAC is a political action committee.")

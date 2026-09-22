@@ -17,20 +17,13 @@ from assistant.knowledge_base import KnowledgeBase
 from assistant.safety import (
     COMPLIANCE_DISCLAIMER,
     REFUSAL_MESSAGES,
+    cites_alabama_statute,
     detect_prompt_injection,
     pii_notice,
     redact_pii,
 )
 
 MODEL = "claude-haiku-4-5"
-
-COMPLIANCE_CATEGORIES = {
-    "fcpa_statute",
-    "ethics_law",
-    "ag_opinions",
-    "ethics_commission",
-    "sos_guidance",
-}
 
 SYSTEM_PROMPT_TEMPLATE = (
     "You are an AI assistant for campaign staff using the VoteCivic/SignalVote "
@@ -51,6 +44,10 @@ SYSTEM_PROMPT_TEMPLATE = (
     "Today, for this campaign, is {as_of_date}; when asked for the next or "
     "upcoming filing deadline, pass that date as get_filing_deadlines' "
     "on_or_after argument rather than returning the earliest deadline on file. "
+    "When you answer from a statute, rule, or opinion retrieved via "
+    "search_knowledge_base, cite the specific section inline (e.g. "
+    "'§ 17-5-8(a)(1)'), not just 'the statute' - the user should be able to "
+    "verify the answer without asking where it came from. "
     "Be concise and accurate.\n\n"
     "Knowledge base notes: some AG opinions and a few Ethics Law sections use "
     "the pre-2006 numbering for the Fair Campaign Practices Act (§ 17-22A-x); "
@@ -70,12 +67,18 @@ SYSTEM_PROMPT_TEMPLATE = (
     "3. If the question is unrelated to Alabama campaign-finance compliance, "
     "this platform, political/campaign-finance terminology, or this "
     "campaign's own data, call decline_to_answer with category off_topic "
-    "instead of answering.\n"
+    "instead of answering. Political/campaign-finance terminology is in "
+    "scope even when it's phrased around federal usage (e.g. 'what does the "
+    "FEC mean by X') - only decline questions with no connection to "
+    "campaigns, elections, or this platform at all.\n"
     "4. If the question asks for your subjective opinion or for legal advice "
     "tailored to the user's specific situation (as opposed to objective "
     "information), call decline_to_answer with category opinion_or_advice "
     "instead of answering.\n"
-    "5. Otherwise answer normally using the tools above."
+    "5. Otherwise, gather what you need with the tools above, then call "
+    "provide_answer with your final answer. provide_answer is the only way "
+    "to give a normal answer - never respond with plain text instead of "
+    "calling a tool."
 )
 
 SEARCH_TOOL = {
@@ -208,6 +211,26 @@ DECLINE_TOOL = {
     },
 }
 
+PROVIDE_ANSWER_TOOL = {
+    "name": "provide_answer",
+    "description": (
+        "Call this to give your final answer once you have everything you "
+        "need (after any necessary search_knowledge_base / data tool calls). "
+        "This is the only way to end with a normal answer - never respond "
+        "with plain text instead of calling this."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "text": {
+                "type": "string",
+                "description": "The final answer to show the user, in markdown.",
+            }
+        },
+        "required": ["text"],
+    },
+}
+
 DATA_TOOLS = {
     "get_contributions": lambda i: campaign_data.get_contributions(i.get("donor")),
     "get_expenditures": lambda i: campaign_data.get_expenditures(i.get("category")),
@@ -226,7 +249,13 @@ ALL_TOOLS = [
     CANVASSING_TOOL,
     DEADLINES_TOOL,
     DECLINE_TOOL,
+    PROVIDE_ANSWER_TOOL,
 ]
+
+# Only the terminal tools - offered alone on the forced wrap-up call so a
+# question that's eaten its whole round budget still ends in an answer
+# instead of a stuck "let me search for..." fragment.
+FINISH_TOOLS = [DECLINE_TOOL, PROVIDE_ANSWER_TOOL]
 
 MAX_TOOL_ROUNDS = 5
 
@@ -258,6 +287,37 @@ def _get_client() -> anthropic.Anthropic:
     return _client
 
 
+def _build_final_answer(
+    kind: str,
+    payload: str,
+    citations: list[str],
+    pii_found: list[str],
+) -> AssistantAnswer:
+    if kind == "declined":
+        category = payload
+        text = REFUSAL_MESSAGES.get(category, REFUSAL_MESSAGES["off_topic"])
+        refused = True
+        citations = []
+    else:
+        text = payload
+        refused = False
+        compliance_cited = cites_alabama_statute(text)
+        category = "compliance" if compliance_cited else "general"
+        if compliance_cited:
+            text += COMPLIANCE_DISCLAIMER
+
+    if pii_found:
+        text = pii_notice(pii_found) + text
+
+    return AssistantAnswer(
+        text=text,
+        category=category,
+        citations=citations,
+        refused=refused,
+        redacted=bool(pii_found),
+    )
+
+
 def handle_question(
     question: str,
     campaign_context: dict,
@@ -268,15 +328,7 @@ def handle_question(
     question, pii_found = redact_pii(question)
 
     if detect_prompt_injection(question):
-        text = REFUSAL_MESSAGES["prompt_injection"]
-        if pii_found:
-            text = pii_notice(pii_found) + text
-        return AssistantAnswer(
-            text=text,
-            category="prompt_injection",
-            refused=True,
-            redacted=bool(pii_found),
-        )
+        return _build_final_answer("declined", "prompt_injection", [], pii_found)
 
     system = SYSTEM_PROMPT_TEMPLATE.format(
         state=campaign_context.get("state", "Alabama"),
@@ -291,7 +343,6 @@ def handle_question(
         {"role": "user", "content": f"<user_message>\n{question}\n</user_message>"}
     ]
     citations: list[str] = []
-    compliance_cited = False
 
     for _ in range(MAX_TOOL_ROUNDS):
         response = client.messages.create(
@@ -299,28 +350,39 @@ def handle_question(
             max_tokens=1024,
             system=system,
             tools=ALL_TOOLS,
+            tool_choice={"type": "any"},
             messages=messages,
         )
-        if response.stop_reason != "tool_use":
-            break
 
-        messages.append({"role": "assistant", "content": response.content})
-        tool_results = []
-        declined_category = None
+        # Check for a terminal tool call first, before touching `messages` -
+        # if this round ends the conversation, there's no point recording it
+        # as conversation history we're about to discard.
+        terminal = None
         for block in response.content:
             if block.type != "tool_use":
                 continue
             if block.name == "decline_to_answer":
-                declined_category = block.input.get("category", "off_topic")
+                terminal = ("declined", block.input.get("category", "off_topic"))
                 break
+            if block.name == "provide_answer":
+                terminal = ("answered", block.input.get("text", ""))
+                break
+
+        if terminal is not None:
+            kind, payload = terminal
+            return _build_final_answer(kind, payload, citations, pii_found)
+
+        messages.append({"role": "assistant", "content": response.content})
+        tool_results = []
+        for block in response.content:
+            if block.type != "tool_use":
+                continue
             if block.name == "search_knowledge_base":
                 knowledge_base = knowledge_base or _get_knowledge_base()
                 passages = knowledge_base.search(block.input["query"])
                 citations.extend(
                     p.source for p in passages if p.source not in citations
                 )
-                if passages and passages[0].category in COMPLIANCE_CATEGORIES:
-                    compliance_cited = True
                 content = "\n\n".join(
                     f"[{p.source}]"
                     + (f"\nKnown issue: {p.flag}" if p.flag else "")
@@ -337,28 +399,39 @@ def handle_question(
                 }
             )
 
-        if declined_category is not None:
-            text = REFUSAL_MESSAGES.get(
-                declined_category, REFUSAL_MESSAGES["off_topic"]
-            )
-            if pii_found:
-                text = pii_notice(pii_found) + text
-            return AssistantAnswer(
-                text=text,
-                category=declined_category,
-                refused=True,
-                redacted=bool(pii_found),
-            )
-
         messages.append({"role": "user", "content": tool_results})
 
-    text = next((block.text for block in response.content if block.type == "text"), "")
-    category = "general"
-    if compliance_cited:
-        text += COMPLIANCE_DISCLAIMER
-        category = "compliance"
-    if pii_found:
-        text = pii_notice(pii_found) + text
-    return AssistantAnswer(
-        text=text, category=category, citations=citations, redacted=bool(pii_found)
+    # Round budget exhausted without a terminal tool call (e.g. the model
+    # kept re-searching). Force a wrap-up with only the terminal tools
+    # offered, so the caller gets a real answer instead of a stuck
+    # "let me search for..." fragment.
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=1024,
+        system=system,
+        tools=FINISH_TOOLS,
+        tool_choice={"type": "any"},
+        messages=messages,
+    )
+    for block in response.content:
+        if block.type != "tool_use":
+            continue
+        if block.name == "decline_to_answer":
+            return _build_final_answer(
+                "declined",
+                block.input.get("category", "off_topic"),
+                citations,
+                pii_found,
+            )
+        if block.name == "provide_answer":
+            return _build_final_answer(
+                "answered", block.input.get("text", ""), citations, pii_found
+            )
+
+    return _build_final_answer(
+        "answered",
+        "I wasn't able to put together a complete answer to that - please "
+        "try rephrasing or asking something more specific.",
+        citations,
+        pii_found,
     )

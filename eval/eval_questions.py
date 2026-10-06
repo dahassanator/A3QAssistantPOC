@@ -13,6 +13,9 @@ instead declares what a correct answer must contain or do:
 - `expect_text_contains_all` / `expect_text_contains_any`: keywords the
   answer text must contain (all of / at least one of), case-insensitive -
   proof of the specific fact, not just the right topic.
+- `expect_text_not_contains`: strings the answer text must not contain,
+  case-insensitive - proof the answer avoids a known-wrong form (e.g. a
+  superseded statute number).
 """
 
 from dataclasses import dataclass, field
@@ -29,6 +32,7 @@ class EvalQuestion:
     expect_citation_contains: list[str] = field(default_factory=list)
     expect_text_contains_all: list[str] = field(default_factory=list)
     expect_text_contains_any: list[str] = field(default_factory=list)
+    expect_text_not_contains: list[str] = field(default_factory=list)
 
 
 QUESTIONS: list[EvalQuestion] = [
@@ -71,6 +75,22 @@ QUESTIONS: list[EvalQuestion] = [
         ),
         expect_answer_category="compliance",
         expect_text_contains_any=["106,000", "$106,000"],
+    ),
+    EvalQuestion(
+        id="compliance-current-numbering-ago-94-00227",
+        eval_category="compliance",
+        question=(
+            "Does a political ad in Alabama have to use the exact words "
+            "'paid advertisement'? What did the Attorney General say?"
+        ),
+        notes=(
+            "AG Opinion 94-00227 cites the pre-2006 § 17-22A-12; the answer "
+            "must cite the current § 17-5-12 and never the old number."
+        ),
+        expect_answer_category="compliance",
+        expect_citation_contains=["ag_opinions/AGO_94-00227"],
+        expect_text_contains_all=["17-5-12"],
+        expect_text_not_contains=["17-22A"],
     ),
     # --- Political/campaign-finance terminology ---
     EvalQuestion(

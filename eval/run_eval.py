@@ -48,6 +48,12 @@ def grade(question, answer) -> dict:
             kw.lower() in text for kw in question.expect_text_contains_any
         )
 
+    if question.expect_text_not_contains:
+        text = answer.text.lower()
+        checks["text_not_contains"] = not any(
+            kw.lower() in text for kw in question.expect_text_not_contains
+        )
+
     return {"checks": checks, "passed": all(checks.values())}
 
 

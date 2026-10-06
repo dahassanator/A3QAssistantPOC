@@ -1,3 +1,5 @@
+import re
+
 from assistant.statute_links import link_statutes
 
 JUSTIA = "https://law.justia.com/codes/alabama/title-17/chapter-5/"
@@ -117,3 +119,65 @@ def test_prose_section_without_statute_number_is_unchanged():
     text = "This section explains reporting; see the next section, Section 3."
 
     assert link_statutes(text) == text
+
+
+def _linked_sections(out):
+    return re.findall(r'href="[^"]*section-(17-5-[\d-]+)/"', out)
+
+
+def test_multi_section_citation_links_each_number():
+    out = link_statutes("See §§ 17-5-7 and 17-5-8.")
+
+    assert _linked_sections(out) == ["17-5-7", "17-5-8"]
+    assert out.startswith("See §§ <a ")
+    assert ">17-5-7</a> and <a " in out
+    assert ">17-5-8</a>." in out
+
+
+def test_mixed_list_classifies_each_number_independently():
+    out = link_statutes("Under §§ 17-5-7, 17-5-8, and 36-25-1, ...")
+
+    assert _linked_sections(out) == ["17-5-7", "17-5-8"]
+    assert ">17-5-8</a>, and 36-25-1, ..." in out
+
+
+def test_list_members_keep_their_subsections():
+    out = link_statutes("§§ 17-5-8(a) and 17-5-9 apply.")
+
+    assert _linked_sections(out) == ["17-5-8", "17-5-9"]
+    assert ">17-5-8(a)</a> and " in out
+
+
+def test_range_links_only_the_written_endpoints():
+    out = link_statutes("§§ 17-5-7 through 17-5-9")
+
+    assert _linked_sections(out) == ["17-5-7", "17-5-9"]
+    assert ">17-5-7</a> through <a " in out
+
+
+def test_partial_shorthand_in_range_stays_plain():
+    out = link_statutes("§§ 17-5-7 through -9 cover this.")
+
+    assert _linked_sections(out) == ["17-5-7"]
+    assert ">17-5-7</a> through -9 cover this." in out
+
+
+def test_plural_sections_prefix_links_each_number():
+    out = link_statutes("Sections 17-5-7 and 17-5-8 apply.")
+
+    assert _linked_sections(out) == ["17-5-7", "17-5-8"]
+    assert out.startswith("Sections <a ")
+
+
+def test_ala_code_multi_section_prefix_links_each_number():
+    out = link_statutes("Ala. Code §§ 17-5-7 and 17-5-8")
+
+    assert _linked_sections(out) == ["17-5-7", "17-5-8"]
+    assert out.startswith("Ala. Code §§ <a ")
+
+
+def test_list_does_not_swallow_unprefixed_number_after_prose():
+    out = link_statutes("§§ 17-5-7 and 17-5-8 apply; call 1-800-274-8683.")
+
+    assert _linked_sections(out) == ["17-5-7", "17-5-8"]
+    assert "call 1-800-274-8683." in out

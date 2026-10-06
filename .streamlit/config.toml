@@ -5,3 +5,8 @@
 # failure logs a traceback and slows the app. Restart `streamlit run` to pick
 # up code changes instead.
 fileWatcherType = "none"
+
+[theme]
+# The left pane is a light-mode screenshot of VoteCivic; dark mode would render
+# white text on the white overlay panel.
+base = "light"

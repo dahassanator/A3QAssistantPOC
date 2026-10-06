@@ -1,0 +1,7 @@
+[server]
+# Streamlit's file watcher inspects every loaded module on rerun. With
+# transformers (via sentence-transformers) loaded, that triggers lazy imports
+# of image-model modules needing torchvision, which isn't installed - each
+# failure logs a traceback and slows the app. Restart `streamlit run` to pick
+# up code changes instead.
+fileWatcherType = "none"

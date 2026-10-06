@@ -12,6 +12,7 @@ The output is rendered with HTML enabled, so the answer's own `&` and
 import re
 
 LINK_COLOR = "#1c83e1"
+_LINK_STYLE = f"color:{LINK_COLOR};text-decoration:underline"
 JUSTIA_FCPA_URL = "https://law.justia.com/codes/alabama/title-17/chapter-5/section-17-5-{section}/"
 
 _SPACE = r"[  ]"
@@ -44,14 +45,19 @@ def _escape_html(text: str) -> str:
 
 
 def _render_citation(citation_text: str, number: re.Match) -> str:
-    # Fair Campaign Practices Act only (Title 17, Chapter 5); every other
-    # statute is left as plain text.
+    # Only Fair Campaign Practices Act (Title 17, Chapter 5) URLs are known
+    # to be right. Every other statute - Ethics Law, other titles, and the
+    # old § 17-22A-x numbering (renumbering isn't one-to-one, so it isn't
+    # mapped) - gets a pseudo-link that looks the same but goes nowhere.
     if (number["title"], number["chapter"]) != ("17", "5"):
-        return citation_text
+        return (
+            f'<span title="Link coming soon" '
+            f'style="{_LINK_STYLE};cursor:default">{citation_text}</span>'
+        )
     url = JUSTIA_FCPA_URL.format(section=number["section"].replace(".", "-"))
     return (
         f'<a href="{url}" target="_blank" rel="noopener noreferrer" '
-        f'style="color:{LINK_COLOR};text-decoration:underline">{citation_text}</a>'
+        f'style="{_LINK_STYLE}">{citation_text}</a>'
     )
 
 

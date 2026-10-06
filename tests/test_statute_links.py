@@ -3,6 +3,10 @@ import re
 from assistant.statute_links import link_statutes
 
 JUSTIA = "https://law.justia.com/codes/alabama/title-17/chapter-5/"
+PSEUDO_OPEN = (
+    '<span title="Link coming soon" '
+    'style="color:#1c83e1;text-decoration:underline;cursor:default">'
+)
 
 
 def test_fcpa_citation_becomes_justia_link():
@@ -69,10 +73,31 @@ def test_text_without_citations_is_unchanged():
     assert link_statutes(text) == text
 
 
-def test_non_fcpa_citations_are_not_linked():
-    text = "See § 36-25-1 and the old § 17-22A-12."
+def test_ethics_law_citation_becomes_pseudo_link():
+    out = link_statutes("See § 36-25-1 for definitions.")
 
-    assert link_statutes(text) == text
+    assert out == f"See {PSEUDO_OPEN}§ 36-25-1</span> for definitions."
+    assert "href" not in out
+
+
+def test_old_fcpa_numbering_is_pseudo_link_not_mapped_to_17_5():
+    out = link_statutes("the old § 17-22A-12.")
+
+    assert out == f"the old {PSEUDO_OPEN}§ 17-22A-12</span>."
+    assert "justia" not in out
+
+
+def test_other_title_citation_becomes_pseudo_link():
+    out = link_statutes("Per § 11-45-1(b), cities may act.")
+
+    assert out == f"Per {PSEUDO_OPEN}§ 11-45-1(b)</span>, cities may act."
+
+
+def test_fcpa_and_non_fcpa_citations_in_same_answer():
+    out = link_statutes("Compare § 17-5-12 with § 36-25-1.")
+
+    assert f'<a href="{JUSTIA}section-17-5-12/"' in out
+    assert f"{PSEUDO_OPEN}§ 36-25-1</span>." in out
 
 
 def test_section_prefix_citation_is_linked():
@@ -109,10 +134,13 @@ def test_ala_code_prefix_with_decimal_section():
     assert ">Ala. Code § 17-5-19.1</a> sets penalties." in out
 
 
-def test_non_fcpa_citations_with_other_prefixes_are_not_linked():
-    text = "Section 36-25-1 and Ala. Code § 36-25-14 cover ethics."
+def test_non_fcpa_citations_with_other_prefixes_become_pseudo_links():
+    out = link_statutes("Section 36-25-1 and Ala. Code § 36-25-14 cover ethics.")
 
-    assert link_statutes(text) == text
+    assert out == (
+        f"{PSEUDO_OPEN}Section 36-25-1</span> and "
+        f"{PSEUDO_OPEN}Ala. Code § 36-25-14</span> cover ethics."
+    )
 
 
 def test_prose_section_without_statute_number_is_unchanged():
@@ -138,7 +166,7 @@ def test_mixed_list_classifies_each_number_independently():
     out = link_statutes("Under §§ 17-5-7, 17-5-8, and 36-25-1, ...")
 
     assert _linked_sections(out) == ["17-5-7", "17-5-8"]
-    assert ">17-5-8</a>, and 36-25-1, ..." in out
+    assert f">17-5-8</a>, and {PSEUDO_OPEN}36-25-1</span>, ..." in out
 
 
 def test_list_members_keep_their_subsections():

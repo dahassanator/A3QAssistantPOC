@@ -11,6 +11,7 @@ from assistant.campaign_data import (
     FILING_DEADLINES,
 )
 from assistant.orchestrator import handle_question
+from assistant.statute_links import link_statutes
 
 try:
     if "ANTHROPIC_API_KEY" in st.secrets:
@@ -94,7 +95,11 @@ with chat_col:
     with history:
         for msg in st.session_state.messages:
             with st.chat_message(msg["role"]):
-                st.markdown(msg["content"])
+                # Assistant answers are stored already linked and HTML-escaped
+                # (see link_statutes); user messages never get HTML rendering.
+                st.markdown(
+                    msg["content"], unsafe_allow_html=msg["role"] == "assistant"
+                )
 
     question = st.chat_input("Ask a compliance, how-to, or terminology question...")
 
@@ -112,8 +117,8 @@ with chat_col:
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
                     answer = handle_question(question, campaign)
-                displayed_answer = answer.text.replace("$", "\\$")
-                st.markdown(displayed_answer)
+                displayed_answer = link_statutes(answer.text.replace("$", "\\$"))
+                st.markdown(displayed_answer, unsafe_allow_html=True)
 
         st.session_state.messages.append(
             {"role": "assistant", "content": displayed_answer}

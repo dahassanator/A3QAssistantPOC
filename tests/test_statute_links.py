@@ -71,3 +71,49 @@ def test_non_fcpa_citations_are_not_linked():
     text = "See § 36-25-1 and the old § 17-22A-12."
 
     assert link_statutes(text) == text
+
+
+def test_section_prefix_citation_is_linked():
+    out = link_statutes("Under Section 17-5-7, solicit after session.")
+
+    assert f'href="{JUSTIA}section-17-5-7/"' in out
+    assert ">Section 17-5-7</a>, solicit" in out
+
+
+def test_lowercase_section_prefix_mid_sentence_is_linked():
+    out = link_statutes("as required by section 17-5-8.")
+
+    assert ">section 17-5-8</a>." in out
+
+
+def test_ala_code_prefix_is_part_of_link_text():
+    out = link_statutes("See Ala. Code § 17-5-7 for details.")
+
+    assert f'See <a href="{JUSTIA}section-17-5-7/"' in out
+    assert ">Ala. Code § 17-5-7</a> for details." in out
+
+
+def test_section_prefix_with_subsections():
+    out = link_statutes("Section 17-5-8(a)(1) applies.")
+
+    assert f'href="{JUSTIA}section-17-5-8/"' in out
+    assert ">Section 17-5-8(a)(1)</a> applies." in out
+
+
+def test_ala_code_prefix_with_decimal_section():
+    out = link_statutes("Ala. Code § 17-5-19.1 sets penalties.")
+
+    assert f'href="{JUSTIA}section-17-5-19-1/"' in out
+    assert ">Ala. Code § 17-5-19.1</a> sets penalties." in out
+
+
+def test_non_fcpa_citations_with_other_prefixes_are_not_linked():
+    text = "Section 36-25-1 and Ala. Code § 36-25-14 cover ethics."
+
+    assert link_statutes(text) == text
+
+
+def test_prose_section_without_statute_number_is_unchanged():
+    text = "This section explains reporting; see the next section, Section 3."
+
+    assert link_statutes(text) == text

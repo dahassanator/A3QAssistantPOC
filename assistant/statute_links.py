@@ -14,12 +14,14 @@ import re
 LINK_COLOR = "#1c83e1"
 JUSTIA_FCPA_URL = "https://law.justia.com/codes/alabama/title-17/chapter-5/section-17-5-{section}/"
 
-# Only prefixed citations: a bare "17-5-7" is never matched, so phone
-# numbers and dates in the knowledge base / campaign data stay untouched.
-# Fair Campaign Practices Act only (Title 17, Chapter 5); a trailing
-# subsection chain like "(a)(1)" is part of the link text.
+# Only prefixed citations ("§ 17-5-7", "Section 17-5-7", "Ala. Code
+# § 17-5-7"): a bare "17-5-7" is never matched, so phone numbers and dates
+# in the knowledge base / campaign data stay untouched. Fair Campaign
+# Practices Act only (Title 17, Chapter 5); the prefix and a trailing
+# subsection chain like "(a)(1)" are part of the link text.
 _FCPA_CITATION_RE = re.compile(
-    r"§[  ]?17-5-(?P<section>\d+(?:\.\d+)?)(?:\([A-Za-z0-9]+\))*"
+    r"(?:\bAla\.[  ]?Code[  ]?§|§|\b[Ss]ection)[  ]?"
+    r"17-5-(?P<section>\d+(?:\.\d+)?)(?:\([A-Za-z0-9]+\))*"
 )
 
 

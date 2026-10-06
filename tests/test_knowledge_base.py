@@ -43,3 +43,14 @@ def test_unflagged_source_has_no_flag(kb):
     results = kb.search("what does the FEC mean by an independent expenditure?")
 
     assert results[0].flag is None
+
+
+def test_text_deep_in_a_long_file_is_retrievable(kb):
+    # The contribution definition sits ~400 tokens into § 17-5-2, past the
+    # embedding model's 256-token window - only findable if files are chunked.
+    results = kb.search("is a loan from a third party a contribution?", k=5)
+
+    match = next(
+        p for p in results if p.source == "fcpa_statute/17-5-2_definitions.md"
+    )
+    assert "payment of a third party" in match.text

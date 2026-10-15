@@ -26,6 +26,38 @@ FLAGS_FILENAME = "_FLAGS.md"
 _FLAG_ROW_RE = re.compile(r"^\|\s*`([^`]+)`\s*\|\s*(.+?)\s*\|$")
 
 
+def load_flags(docs_dir: Path = DEFAULT_DOCS_DIR) -> list[tuple[str, str]]:
+    """Parse `_FLAGS.md`'s quick-reference table into (source, flag) pairs.
+
+    Only rows naming a single file are captured (exact path, or a
+    `path/prefix_...` truncation treated as a startswith match). Rows
+    that group several files or a whole directory are skipped here -
+    those are broader caveats (e.g. pre-2006 statute renumbering) that
+    belong in the system prompt as a general rule instead.
+    """
+    path = Path(docs_dir) / FLAGS_FILENAME
+    if not path.exists():
+        return []
+    flags = []
+    for line in path.read_text().splitlines():
+        match = _FLAG_ROW_RE.match(line)
+        if not match:
+            continue
+        flags.append(match.groups())
+    return flags
+
+
+def match_flag(flags: list[tuple[str, str]], source: str) -> str | None:
+    """The caveat from `load_flags` output that covers `source`, if any."""
+    for pattern, flag in flags:
+        if pattern.endswith("..."):
+            if source.startswith(pattern[: -len("...")]):
+                return flag
+        elif source == pattern:
+            return flag
+    return None
+
+
 @dataclass
 class Passage:
     text: str
@@ -56,36 +88,18 @@ class KnowledgeBase:
         )
 
     def _load_flags(self, docs_dir: Path) -> list[tuple[str, str]]:
-        """Parse `_FLAGS.md`'s quick-reference table into (source, flag) pairs.
-
-        Only rows naming a single file are captured (exact path, or a
-        `path/prefix_...` truncation treated as a startswith match). Rows
-        that group several files or a whole directory are skipped here -
-        those are broader caveats (e.g. pre-2006 statute renumbering) that
-        belong in the system prompt as a general rule instead.
-        """
-        path = docs_dir / FLAGS_FILENAME
-        if not path.exists():
-            return []
-        flags = []
-        for line in path.read_text().splitlines():
-            match = _FLAG_ROW_RE.match(line)
-            if not match:
-                continue
-            flags.append(match.groups())
-        return flags
+        return load_flags(docs_dir)
 
     def _flag_for(self, source: str) -> str | None:
-        for pattern, flag in self._flags:
-            if pattern.endswith("..."):
-                if source.startswith(pattern[: -len("...")]):
-                    return flag
-            elif source == pattern:
-                return flag
-        return None
+        return match_flag(self._flags, source)
 
-    def search(self, query: str, k: int = 3) -> list[Passage]:
-        result = self._collection.query(query_texts=[query], n_results=k)
+    def search(
+        self, query: str, k: int = 3, exclude_categories: list[str] | None = None
+    ) -> list[Passage]:
+        where = (
+            {"category": {"$nin": exclude_categories}} if exclude_categories else None
+        )
+        result = self._collection.query(query_texts=[query], n_results=k, where=where)
         return [
             Passage(
                 text=text,

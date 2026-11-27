@@ -1,0 +1,1872 @@
+{
+  "started_utc": "2026-10-15T20:53:55.953377+00:00",
+  "finished_utc": "2026-10-15T20:54:12.582570+00:00",
+  "model": "claude-haiku-4-5",
+  "pricing_usd_per_mtok": {
+    "input": 1.0,
+    "output": 5.0,
+    "cache_write": 1.25,
+    "cache_read": 0.1
+  },
+  "git_commit": "801f1fbe12bd8a77f802b51169a7a0cde7d5486c",
+  "dry_run": true,
+  "runs_per_question": 1,
+  "strategies": [
+    "rag_current",
+    "long_context",
+    "agentic_nav",
+    "agentic_nav_10",
+    "hybrid",
+    "glossary_inline"
+  ],
+  "question_counts": {
+    "original": 21,
+    "hard": 13
+  },
+  "summary": {
+    "rag_current": {
+      "runs": 2,
+      "pass_rate_original": 1.0,
+      "pass_rate_hard": 1.0,
+      "pass_rate_overall": 1.0,
+      "content_pass_rate_overall": 1.0,
+      "content_pass_rate_hard": 1.0,
+      "questions_flipped": [],
+      "failures": [],
+      "input_tokens_mean": 13147,
+      "input_tokens_p95": 17710,
+      "output_tokens_mean": 408,
+      "output_tokens_p95": 428,
+      "cache_read_input_tokens_mean": 0,
+      "cache_read_input_tokens_p95": 0,
+      "cache_creation_input_tokens_mean": 0,
+      "cache_creation_input_tokens_p95": 0,
+      "n_calls_mean": 2.5,
+      "n_calls_p95": 3,
+      "cost_usd_mean": 0.015186999999999999,
+      "cost_usd_p95": 0.01985,
+      "latency_p50": 5.528210932999855,
+      "latency_p95": 6.100924251000151
+    },
+    "long_context": {
+      "runs": 2,
+      "pass_rate_original": 1.0,
+      "pass_rate_hard": 1.0,
+      "pass_rate_overall": 1.0,
+      "content_pass_rate_overall": 1.0,
+      "content_pass_rate_hard": 1.0,
+      "questions_flipped": [],
+      "failures": [],
+      "input_tokens_mean": 1338,
+      "input_tokens_p95": 1349,
+      "output_tokens_mean": 329.5,
+      "output_tokens_p95": 375,
+      "cache_read_input_tokens_mean": 54311,
+      "cache_read_input_tokens_p95": 108622,
+      "cache_creation_input_tokens_mean": 54311,
+      "cache_creation_input_tokens_p95": 108622,
+      "n_calls_mean": 1,
+      "n_calls_p95": 1,
+      "cost_usd_mean": 0.07630535000000001,
+      "cost_usd_p95": 0.1389795,
+      "latency_p50": 3.94220378,
+      "latency_p95": 6.1486071490000995
+    },
+    "agentic_nav_10": {
+      "runs": 2,
+      "pass_rate_original": 1.0,
+      "pass_rate_hard": 1.0,
+      "pass_rate_overall": 1.0,
+      "content_pass_rate_overall": 1.0,
+      "content_pass_rate_hard": 1.0,
+      "questions_flipped": [],
+      "failures": [],
+      "input_tokens_mean": 25337.5,
+      "input_tokens_p95": 31512,
+      "output_tokens_mean": 491,
+      "output_tokens_p95": 634,
+      "cache_read_input_tokens_mean": 0,
+      "cache_read_input_tokens_p95": 0,
+      "cache_creation_input_tokens_mean": 0,
+      "cache_creation_input_tokens_p95": 0,
+      "n_calls_mean": 5.5,
+      "n_calls_p95": 6,
+      "cost_usd_mean": 0.027792499999999998,
+      "cost_usd_p95": 0.034682,
+      "latency_p50": 6.151561595999965,
+      "latency_p95": 9.294648538000047
+    },
+    "glossary_inline": {
+      "runs": 2,
+      "pass_rate_original": 1.0,
+      "pass_rate_hard": 1.0,
+      "pass_rate_overall": 1.0,
+      "content_pass_rate_overall": 1.0,
+      "content_pass_rate_hard": 1.0,
+      "questions_flipped": [],
+      "failures": [],
+      "input_tokens_mean": 14023.5,
+      "input_tokens_p95": 18025,
+      "output_tokens_mean": 402.5,
+      "output_tokens_p95": 461,
+      "cache_read_input_tokens_mean": 0,
+      "cache_read_input_tokens_p95": 0,
+      "cache_creation_input_tokens_mean": 0,
+      "cache_creation_input_tokens_p95": 0,
+      "n_calls_mean": 2.5,
+      "n_calls_p95": 3,
+      "cost_usd_mean": 0.016036,
+      "cost_usd_p95": 0.019745,
+      "latency_p50": 5.389944852000099,
+      "latency_p95": 6.336248651999995
+    },
+    "hybrid": {
+      "runs": 2,
+      "pass_rate_original": 1.0,
+      "pass_rate_hard": 1.0,
+      "pass_rate_overall": 1.0,
+      "content_pass_rate_overall": 1.0,
+      "content_pass_rate_hard": 1.0,
+      "questions_flipped": [],
+      "failures": [],
+      "input_tokens_mean": 25426,
+      "input_tokens_p95": 34752,
+      "output_tokens_mean": 440,
+      "output_tokens_p95": 477,
+      "cache_read_input_tokens_mean": 0,
+      "cache_read_input_tokens_p95": 0,
+      "cache_creation_input_tokens_mean": 0,
+      "cache_creation_input_tokens_p95": 0,
+      "n_calls_mean": 3.5,
+      "n_calls_p95": 4,
+      "cost_usd_mean": 0.027626,
+      "cost_usd_p95": 0.037137,
+      "latency_p50": 5.987486978999868,
+      "latency_p95": 7.996296963000077
+    },
+    "agentic_nav": {
+      "runs": 2,
+      "pass_rate_original": 1.0,
+      "pass_rate_hard": 0.0,
+      "pass_rate_overall": 0.5,
+      "content_pass_rate_overall": 0.5,
+      "content_pass_rate_hard": 0.0,
+      "questions_flipped": [],
+      "failures": [
+        {
+          "question_id": "hard-lobbyist-meal-limit",
+          "run": 1,
+          "failure": "wandering (round budget exhausted)"
+        }
+      ],
+      "input_tokens_mean": 19856.5,
+      "input_tokens_p95": 21375,
+      "output_tokens_mean": 439.5,
+      "output_tokens_p95": 628,
+      "cache_read_input_tokens_mean": 0,
+      "cache_read_input_tokens_p95": 0,
+      "cache_creation_input_tokens_mean": 0,
+      "cache_creation_input_tokens_p95": 0,
+      "n_calls_mean": 6,
+      "n_calls_p95": 6,
+      "cost_usd_mean": 0.022054,
+      "cost_usd_p95": 0.024515000000000002,
+      "latency_p50": 4.707805994999944,
+      "latency_p95": 9.57682603000012
+    }
+  },
+  "long_context_cache": {
+    "cold": {
+      "calls": 2,
+      "cost_usd_mean": 0.139117,
+      "latency_s_p50": 6.089425429999892,
+      "latency_s_p95": 6.522306371000013
+    },
+    "warm": {
+      "calls": 1,
+      "cost_usd_mean": 0.013631200000000001,
+      "latency_s_p50": 3.941931898999883,
+      "latency_s_p95": 3.941931898999883
+    },
+    "uncached": {
+      "calls": 0,
+      "cost_usd_mean": null,
+      "latency_s_p50": null,
+      "latency_s_p95": null
+    }
+  },
+  "cold_probe": [
+    {
+      "strategy": "long_context_cold_probe",
+      "question_set": "cold_probe",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 6.522823412999969,
+      "n_calls": 1,
+      "input_tokens": 1327,
+      "output_tokens": 426,
+      "cache_creation_input_tokens": 108638,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.1392545,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 6.522306371000013,
+            "input_tokens": 1327,
+            "output_tokens": 426,
+            "cache_creation_input_tokens": 108638,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama's Fair Campaign Practices Act does not impose contribution limits (caps on how much any person can give). However, it does establish reporting thresholds that determine when contributions must be itemized on campaign finance reports.\n\n## Reporting Threshold\n\n**$100 aggregate threshold per contributor**: Once a single contributor's total contributions to a committee reach **more than $100 in a calendar year**, those contributions must be itemized\u2014meaning the contributor's name, address, and contribution amounts must be listed on the report. Contributions of $100 or less in the aggregate from any one source do not need to be itemized; they are reported only as a lump-sum total (\u00a7 17-5-8(d)(2), (3)).\n\n## Other Reporting Thresholds\n\n- **$1,000 threshold for becoming a candidate**: An individual who receives or spends more than $1,000 in contributions or expenditures becomes a \"candidate\" and must establish a principal campaign committee and begin filing campaign finance reports (\u00a7 17-5-2(a)(1)(b)).\n\n- **$1,000 threshold for PAC filing**: A political action committee must file a Statement of Organization within 10 days of receiving or anticipating contributions or expenditures exceeding $1,000 in the aggregate (\u00a7 17-5-5(a)).\n\n- **$20,000 major contribution reporting**: Committees must file a report disclosing receipt of any single contribution of $20,000 or more within two business days of receipt, unless already included in a scheduled report (\u00a7 17-5-8.1(c)).\n\n**No contribution limit exists in Alabama state law** for candidates or committees. This is different from federal law, which caps individual contributions to candidates.\n\n"
+                }
+              }
+            ],
+            "cost_usd": 0.1392545
+          }
+        ],
+        "sources_seen": [],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama's Fair Campaign Practices Act does not impose contribution limits (caps on how much any person can give). However, it does establish reporting thresholds that determine when contributions must be itemized on campaign finance reports.\n\n## Reporting Threshold\n\n**$100 aggregate threshold per contributor**: Once a single contributor's total contributions to a committee reach **more than $100 in a calendar year**, those contributions must be itemized\u2014meaning the contributor's name, address, and contribution amounts must be listed on the report. Contributions of $100 or less in the aggregate from any one source do not need to be itemized; they are reported only as a lump-sum total (\u00a7 17-5-8(d)(2), (3)).\n\n## Other Reporting Thresholds\n\n- **$1,000 threshold for becoming a candidate**: An individual who receives or spends more than $1,000 in contributions or expenditures becomes a \"candidate\" and must establish a principal campaign committee and begin filing campaign finance reports (\u00a7 17-5-2(a)(1)(b)).\n\n- **$1,000 threshold for PAC filing**: A political action committee must file a Statement of Organization within 10 days of receiving or anticipating contributions or expenditures exceeding $1,000 in the aggregate (\u00a7 17-5-5(a)).\n\n- **$20,000 major contribution reporting**: Committees must file a report disclosing receipt of any single contribution of $20,000 or more within two business days of receipt, unless already included in a scheduled report (\u00a7 17-5-8.1(c)).\n\n**No contribution limit exists in Alabama state law** for candidates or committees. This is different from federal law, which caps individual contributions to candidates.\n\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md",
+        "fcpa_statute/17-5-2_definitions.md",
+        "fcpa_statute/17-5-5_statement_of_organization.md",
+        "fcpa_statute/17-5-8.1_electronic_reporting_searchable_database.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    }
+  ],
+  "records": [
+    {
+      "strategy": "rag_current",
+      "question_set": "original",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 5.528210932999855,
+      "n_calls": 2,
+      "input_tokens": 8584,
+      "output_tokens": 388,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.010524,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 1.1569740400000228,
+            "input_tokens": 2349,
+            "output_tokens": 46,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "campaign contribution reporting thresholds Alabama"
+                }
+              }
+            ],
+            "cost_usd": 0.002579
+          },
+          {
+            "latency_s": 4.302060159999883,
+            "input_tokens": 6235,
+            "output_tokens": 342,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama's campaign contribution **reporting threshold** is **$100**. \n\nUnder \u00a7 17-5-8(d), reports must disclose:\n- Each person who made contributions in the aggregate amount **greater than $100** during the calendar year, including the amount and date of all contributions (\u00a7 17-5-8(d)(2))\n- The total amount of other contributions below the $100 threshold (\u00a7 17-5-8(d)(3))\n- Each loan in an aggregate amount greater than $100 (\u00a7 17-5-8(d)(4))\n- Each expenditure in an aggregate amount greater than $100, with the amount, date, and purpose (\u00a7 17-5-8(d)(7))\n- Each expenditure for personal services, salaries, or reimbursed expenses greater than $100 (\u00a7 17-5-8(d)(8))\n\nThis means contributions and expenditures below $100 do not need to be itemized by donor/payee name, though the aggregate total still must be reported.\n\nNote that Alabama does not have contribution amount **limits** on most donors to state and local campaigns\u2014the $100 figure is purely a reporting threshold. The main monetary restriction is the $1,000 cap on federal funds that can be used in state or local races under \u00a7 17-5-15.1."
+                }
+              }
+            ],
+            "cost_usd": 0.007945
+          }
+        ],
+        "sources_seen": [
+          "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+          "fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md",
+          "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama's campaign contribution **reporting threshold** is **$100**. \n\nUnder \u00a7 17-5-8(d), reports must disclose:\n- Each person who made contributions in the aggregate amount **greater than $100** during the calendar year, including the amount and date of all contributions (\u00a7 17-5-8(d)(2))\n- The total amount of other contributions below the $100 threshold (\u00a7 17-5-8(d)(3))\n- Each loan in an aggregate amount greater than $100 (\u00a7 17-5-8(d)(4))\n- Each expenditure in an aggregate amount greater than $100, with the amount, date, and purpose (\u00a7 17-5-8(d)(7))\n- Each expenditure for personal services, salaries, or reimbursed expenses greater than $100 (\u00a7 17-5-8(d)(8))\n\nThis means contributions and expenditures below $100 do not need to be itemized by donor/payee name, though the aggregate total still must be reported.\n\nNote that Alabama does not have contribution amount **limits** on most donors to state and local campaigns\u2014the $100 figure is purely a reporting threshold. The main monetary restriction is the $1,000 cap on federal funds that can be used in state or local races under \u00a7 17-5-15.1.\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+        "fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md",
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "long_context",
+      "question_set": "original",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 6.1486071490000995,
+      "n_calls": 1,
+      "input_tokens": 1327,
+      "output_tokens": 375,
+      "cache_creation_input_tokens": 108622,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.1389795,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 6.089425429999892,
+            "input_tokens": 1327,
+            "output_tokens": 375,
+            "cache_creation_input_tokens": 108622,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama's Fair Campaign Practices Act does not impose **dollar limits** on campaign contributions. There are no caps on how much an individual, corporation, or other entity may give to a candidate or political action committee.\n\nHowever, Alabama **does require disclosure** of contributions above certain thresholds:\n\n**Reporting Thresholds:**\n- **$100 aggregate threshold**: Once a contributor's total contributions to a committee reach or exceed $100 in a calendar year, all contributions from that contributor must be **itemized** by name, address, and amount on campaign finance reports (\u00a7 17-5-8(d)(2)). Contributions under $100 in the aggregate are reported only as a lump sum of \"other contributions.\"\n\n**Major Contribution Threshold:**\n- **$20,000 single contribution**: If a committee receives any single contribution of $20,000 or more, a separate report disclosing that contribution must be filed within **two business days** of receipt, unless the contribution is already included in a scheduled monthly, weekly, or daily report (\u00a7 17-5-8.1(c)).\n\n**Petty Cash Expenditure Threshold:**\n- Committees may make expenditures of up to **$100 per transaction** from petty cash without requiring a check or electronic payment (\u00a7 17-5-6).\n\nFor your municipal election (August 25, 2026), these disclosure rules apply once your campaign exceeds $1,000 in total contributions or expenditures and your principal campaign committee is active.\n\n"
+                }
+              }
+            ],
+            "cost_usd": 0.1389795
+          }
+        ],
+        "sources_seen": [],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama's Fair Campaign Practices Act does not impose **dollar limits** on campaign contributions. There are no caps on how much an individual, corporation, or other entity may give to a candidate or political action committee.\n\nHowever, Alabama **does require disclosure** of contributions above certain thresholds:\n\n**Reporting Thresholds:**\n- **$100 aggregate threshold**: Once a contributor's total contributions to a committee reach or exceed $100 in a calendar year, all contributions from that contributor must be **itemized** by name, address, and amount on campaign finance reports (\u00a7 17-5-8(d)(2)). Contributions under $100 in the aggregate are reported only as a lump sum of \"other contributions.\"\n\n**Major Contribution Threshold:**\n- **$20,000 single contribution**: If a committee receives any single contribution of $20,000 or more, a separate report disclosing that contribution must be filed within **two business days** of receipt, unless the contribution is already included in a scheduled monthly, weekly, or daily report (\u00a7 17-5-8.1(c)).\n\n**Petty Cash Expenditure Threshold:**\n- Committees may make expenditures of up to **$100 per transaction** from petty cash without requiring a check or electronic payment (\u00a7 17-5-6).\n\nFor your municipal election (August 25, 2026), these disclosure rules apply once your campaign exceeds $1,000 in total contributions or expenditures and your principal campaign committee is active.\n\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md",
+        "fcpa_statute/17-5-8.1_electronic_reporting_searchable_database.md",
+        "fcpa_statute/17-5-6_checking_account_expenditures.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "agentic_nav_10",
+      "question_set": "original",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 6.151561595999965,
+      "n_calls": 5,
+      "input_tokens": 19163,
+      "output_tokens": 348,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.020902999999999998,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 1.1339218139999048,
+            "input_tokens": 2618,
+            "output_tokens": 40,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "contribution reporting threshold"
+                }
+              }
+            ],
+            "cost_usd": 0.002818
+          },
+          {
+            "latency_s": 0.6395111229999202,
+            "input_tokens": 2694,
+            "output_tokens": 21,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_categories",
+                "input": {}
+              }
+            ],
+            "cost_usd": 0.002799
+          },
+          {
+            "latency_s": 0.7802820209999481,
+            "input_tokens": 2803,
+            "output_tokens": 41,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_documents",
+                "input": {
+                  "category": "fcpa_statute"
+                }
+              }
+            ],
+            "cost_usd": 0.003008
+          },
+          {
+            "latency_s": 1.0060425699998632,
+            "input_tokens": 4434,
+            "output_tokens": 61,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "read_document",
+                "input": {
+                  "path": "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+                }
+              }
+            ],
+            "cost_usd": 0.004739
+          },
+          {
+            "latency_s": 2.5873005879998345,
+            "input_tokens": 6614,
+            "output_tokens": 185,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama's campaign contribution reporting threshold is **$100**. \n\nUnder \u00a7 17-5-8(d)(2), each report must disclose the identification of each person who has made contributions to the committee or candidate within the calendar year in an **aggregate amount greater than one hundred dollars ($100)**, together with the amount and date of all such contributions. \n\nSimilarly, \u00a7 17-5-8(d)(4) requires disclosure of each loan to or from any person within the calendar year in an aggregate amount greater than one hundred dollars ($100).\n\nContributions below the $100 aggregate threshold are reported only as a lump sum in the total amount of other contributions received, without individual itemization."
+                }
+              }
+            ],
+            "cost_usd": 0.007539
+          }
+        ],
+        "sources_seen": [
+          "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama's campaign contribution reporting threshold is **$100**. \n\nUnder \u00a7 17-5-8(d)(2), each report must disclose the identification of each person who has made contributions to the committee or candidate within the calendar year in an **aggregate amount greater than one hundred dollars ($100)**, together with the amount and date of all such contributions. \n\nSimilarly, \u00a7 17-5-8(d)(4) requires disclosure of each loan to or from any person within the calendar year in an aggregate amount greater than one hundred dollars ($100).\n\nContributions below the $100 aggregate threshold are reported only as a lump sum in the total amount of other contributions received, without individual itemization.\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "glossary_inline",
+      "question_set": "original",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 6.336248651999995,
+      "n_calls": 2,
+      "input_tokens": 10022,
+      "output_tokens": 461,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.012327000000000001,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 1.0354011150000133,
+            "input_tokens": 3068,
+            "output_tokens": 46,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "Alabama campaign contribution reporting thresholds"
+                }
+              }
+            ],
+            "cost_usd": 0.003298
+          },
+          {
+            "latency_s": 5.183477999000161,
+            "input_tokens": 6954,
+            "output_tokens": 415,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama's campaign contribution reporting thresholds are as follows:\n\n**Itemization Threshold:** Under \u00a7 17-5-8(d)(2), you must identify each person who has made contributions to your committee in an aggregate amount **greater than $100** within the calendar year, together with the amount and date of all those contributions. Contributions totaling $100 or less in the aggregate do not need to be itemized individually.\n\n**Other Reporting Requirements:**\n- **Loans:** Each loan to or from any person within the calendar year in an aggregate amount **greater than $100** must be reported (\u00a7 17-5-8(d)(4))\n- **Expenditures:** Each person to whom expenditures have been made in an aggregate amount **greater than $100** within the calendar year must be identified, with the amount, date, and purpose disclosed (\u00a7 17-5-8(d)(7))\n- **Personal Services/Salaries:** Each person to whom personal services, salaries, or reimbursed expenses **greater than $100** have been made must be identified (\u00a7 17-5-8(d)(8))\n\n**Key Point:** These are itemization thresholds, not contribution limits. Even contributions below $100 still count toward your total receipts and must be reported as a lump sum under \"other contributions received\" (\u00a7 17-5-8(d)(3)), but they don't need individual identification.\n\nNote that Alabama does not have explicit per-donor contribution limits like federal law; compliance depends on reporting all contributions and ensuring no violations of specific statutory restrictions (such as the $1,000 limit on federal campaign funds under \u00a7 17-5-15.1).\n"
+                }
+              }
+            ],
+            "cost_usd": 0.009029
+          }
+        ],
+        "sources_seen": [
+          "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+          "fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md",
+          "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama's campaign contribution reporting thresholds are as follows:\n\n**Itemization Threshold:** Under \u00a7 17-5-8(d)(2), you must identify each person who has made contributions to your committee in an aggregate amount **greater than $100** within the calendar year, together with the amount and date of all those contributions. Contributions totaling $100 or less in the aggregate do not need to be itemized individually.\n\n**Other Reporting Requirements:**\n- **Loans:** Each loan to or from any person within the calendar year in an aggregate amount **greater than $100** must be reported (\u00a7 17-5-8(d)(4))\n- **Expenditures:** Each person to whom expenditures have been made in an aggregate amount **greater than $100** within the calendar year must be identified, with the amount, date, and purpose disclosed (\u00a7 17-5-8(d)(7))\n- **Personal Services/Salaries:** Each person to whom personal services, salaries, or reimbursed expenses **greater than $100** have been made must be identified (\u00a7 17-5-8(d)(8))\n\n**Key Point:** These are itemization thresholds, not contribution limits. Even contributions below $100 still count toward your total receipts and must be reported as a lump sum under \"other contributions received\" (\u00a7 17-5-8(d)(3)), but they don't need individual identification.\n\nNote that Alabama does not have explicit per-donor contribution limits like federal law; compliance depends on reporting all contributions and ensuring no violations of specific statutory restrictions (such as the $1,000 limit on federal campaign funds under \u00a7 17-5-15.1).\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+        "fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md",
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "hybrid",
+      "question_set": "original",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 7.996296963000077,
+      "n_calls": 4,
+      "input_tokens": 34752,
+      "output_tokens": 477,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.037137,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 1.1563239889999295,
+            "input_tokens": 2349,
+            "output_tokens": 45,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "campaign contribution reporting thresholds"
+                }
+              }
+            ],
+            "cost_usd": 0.002574
+          },
+          {
+            "latency_s": 0.9769572990001052,
+            "input_tokens": 8262,
+            "output_tokens": 47,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "Alabama contribution limits dollar amount cap individual donor"
+                }
+              }
+            ],
+            "cost_usd": 0.008497
+          },
+          {
+            "latency_s": 1.0359728570001607,
+            "input_tokens": 9272,
+            "output_tokens": 47,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "itemization threshold reporting requirement contributions $100"
+                }
+              }
+            ],
+            "cost_usd": 0.009507
+          },
+          {
+            "latency_s": 4.629658024999799,
+            "input_tokens": 14869,
+            "output_tokens": 338,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama does not have a statutory cap on individual contributions to state and local candidates. However, Alabama law does establish several **reporting thresholds** related to campaign contributions:\n\n## Itemization Threshold\n\nOnce aggregate contributions from or to a specific entity exceed **$100** in a calendar year, contributions and expenditures received or expended must be itemized on the campaign finance report (\u00a7 17-5-8(d)(2) and (d)(7)). Below that threshold, donations can be reported only as a total.\n\n## Filing Threshold\n\nA candidate becomes subject to campaign finance reporting requirements if they receive contributions or make expenditures **in excess of $1,000** (\u00a7 17-5-4.1).\n\n## Major Contribution Reporting\n\nIf a candidate receives a single contribution of **$20,000 or more**, a Major Contribution Report is due within two business days of receipt (unless the contribution is included in a monthly, weekly, or daily report).\n\n## Federal Funds Limitation\n\nState and local principal campaign committees may receive no more than **$1,000** from principal campaign committees of federal candidates (\u00a7 17-5-15.1).\n\nFor detailed guidance on your reporting obligations, check the specific report type due to you\u2014monthly, weekly, daily, or annual\u2014through the FCPA portal at fcpa.alabamavotes.gov.\n"
+                }
+              }
+            ],
+            "cost_usd": 0.016559
+          }
+        ],
+        "sources_seen": [
+          "ethics_law/36-25-14_filing_of_statement_of_economic_interests.md",
+          "ethics_law/36-25-19_lobbyist_quarterly_reports.md",
+          "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+          "fcpa_statute/17-5-3_political_action_committees_officers_accounting.md",
+          "fcpa_statute/17-5-7.1_return_or_refund_of_contributions.md",
+          "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md",
+          "glossary/contribution-limit.md",
+          "sos_guidance/candidate_filing_guidelines_2026.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama does not have a statutory cap on individual contributions to state and local candidates. However, Alabama law does establish several **reporting thresholds** related to campaign contributions:\n\n## Itemization Threshold\n\nOnce aggregate contributions from or to a specific entity exceed **$100** in a calendar year, contributions and expenditures received or expended must be itemized on the campaign finance report (\u00a7 17-5-8(d)(2) and (d)(7)). Below that threshold, donations can be reported only as a total.\n\n## Filing Threshold\n\nA candidate becomes subject to campaign finance reporting requirements if they receive contributions or make expenditures **in excess of $1,000** (\u00a7 17-5-4.1).\n\n## Major Contribution Reporting\n\nIf a candidate receives a single contribution of **$20,000 or more**, a Major Contribution Report is due within two business days of receipt (unless the contribution is included in a monthly, weekly, or daily report).\n\n## Federal Funds Limitation\n\nState and local principal campaign committees may receive no more than **$1,000** from principal campaign committees of federal candidates (\u00a7 17-5-15.1).\n\nFor detailed guidance on your reporting obligations, check the specific report type due to you\u2014monthly, weekly, daily, or annual\u2014through the FCPA portal at fcpa.alabamavotes.gov.\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "ethics_law/36-25-19_lobbyist_quarterly_reports.md",
+        "glossary/contribution-limit.md",
+        "sos_guidance/candidate_filing_guidelines_2026.md",
+        "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+        "fcpa_statute/17-5-7.1_return_or_refund_of_contributions.md",
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md",
+        "fcpa_statute/17-5-3_political_action_committees_officers_accounting.md",
+        "ethics_law/36-25-14_filing_of_statement_of_economic_interests.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "agentic_nav",
+      "question_set": "original",
+      "question_id": "compliance-reporting-thresholds",
+      "run": 1,
+      "latency_s": 9.57682603000012,
+      "n_calls": 6,
+      "input_tokens": 21375,
+      "output_tokens": 628,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.024515000000000002,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 1.156076657000085,
+            "input_tokens": 2618,
+            "output_tokens": 40,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "contribution reporting threshold"
+                }
+              }
+            ],
+            "cost_usd": 0.002818
+          },
+          {
+            "latency_s": 0.9298707069999637,
+            "input_tokens": 2694,
+            "output_tokens": 42,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "reporting contributions receipt itemization"
+                }
+              }
+            ],
+            "cost_usd": 0.002904
+          },
+          {
+            "latency_s": 0.6318008890000328,
+            "input_tokens": 2774,
+            "output_tokens": 21,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_categories",
+                "input": {}
+              }
+            ],
+            "cost_usd": 0.002879
+          },
+          {
+            "latency_s": 0.832116742999915,
+            "input_tokens": 2883,
+            "output_tokens": 41,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_documents",
+                "input": {
+                  "category": "fcpa_statute"
+                }
+              }
+            ],
+            "cost_usd": 0.003088
+          },
+          {
+            "latency_s": 0.9786016810001001,
+            "input_tokens": 4514,
+            "output_tokens": 61,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "read_document",
+                "input": {
+                  "path": "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+                }
+              }
+            ],
+            "cost_usd": 0.004819
+          },
+          {
+            "latency_s": 5.039724709999973,
+            "input_tokens": 5892,
+            "output_tokens": 423,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Alabama's campaign contribution reporting thresholds are established by \u00a7 17-5-8(d):\n\n**$100 Threshold (Itemization)**\n\nContributions and loans must be itemized (reported with the contributor's name, city of residence, amount, and date) if they meet or exceed **$100 in the aggregate during a calendar year**. Key itemization requirements include:\n\n- **Contributions**: Each person who makes contributions totaling more than $100 in a calendar year must be identified, with the amount and date of all contributions (\u00a7 17-5-8(d)(2))\n\n- **Loans**: Each loan to or from any person in an aggregate amount greater than $100 must be identified with the lender, endorsers/guarantors, date, and amount (\u00a7 17-5-8(d)(4))\n\n- **Expenditures**: Each person to whom expenditures have been made totaling more than $100 in a calendar year must be identified with the amount, date, and purpose (\u00a7 17-5-8(d)(7))\n\n- **Personal services/salaries/reimbursed expenses**: Each person receiving more than $100 in aggregate must be identified with the amount, date, and purpose (\u00a7 17-5-8(d)(8))\n\n**Below-Threshold Reporting**\n\nContributions, loans, and expenditures below $100 (individually or in the aggregate) are still reported, but only as lump-sum totals without itemization (\u00a7 17-5-8(d)(3), (5), (6), (9)).\n\nThere are no separate contribution *limits* in Alabama Fair Campaign Practices Act\u2014only these reporting/itemization thresholds.\n"
+                }
+              }
+            ],
+            "cost_usd": 0.008007
+          }
+        ],
+        "sources_seen": [
+          "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_any": true
+      },
+      "answer_text": "Alabama's campaign contribution reporting thresholds are established by \u00a7 17-5-8(d):\n\n**$100 Threshold (Itemization)**\n\nContributions and loans must be itemized (reported with the contributor's name, city of residence, amount, and date) if they meet or exceed **$100 in the aggregate during a calendar year**. Key itemization requirements include:\n\n- **Contributions**: Each person who makes contributions totaling more than $100 in a calendar year must be identified, with the amount and date of all contributions (\u00a7 17-5-8(d)(2))\n\n- **Loans**: Each loan to or from any person in an aggregate amount greater than $100 must be identified with the lender, endorsers/guarantors, date, and amount (\u00a7 17-5-8(d)(4))\n\n- **Expenditures**: Each person to whom expenditures have been made totaling more than $100 in a calendar year must be identified with the amount, date, and purpose (\u00a7 17-5-8(d)(7))\n\n- **Personal services/salaries/reimbursed expenses**: Each person receiving more than $100 in aggregate must be identified with the amount, date, and purpose (\u00a7 17-5-8(d)(8))\n\n**Below-Threshold Reporting**\n\nContributions, loans, and expenditures below $100 (individually or in the aggregate) are still reported, but only as lump-sum totals without itemization (\u00a7 17-5-8(d)(3), (5), (6), (9)).\n\nThere are no separate contribution *limits* in Alabama Fair Campaign Practices Act\u2014only these reporting/itemization thresholds.\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-8_reports_of_contributions_and_expenditures.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "long_context",
+      "question_set": "hard",
+      "question_id": "hard-lobbyist-meal-limit",
+      "run": 1,
+      "latency_s": 3.94220378,
+      "n_calls": 1,
+      "input_tokens": 1349,
+      "output_tokens": 284,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 108622,
+      "cost_usd": 0.013631200000000001,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 3.941931898999883,
+            "input_tokens": 1349,
+            "output_tokens": 284,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 108622,
+            "tools_offered": [
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Under Alabama's Ethics Law, a lobbyist may spend up to **$25 per meal** on an elected official or public employee outside of an official event, with a yearly cap of **$150 per year** from that lobbyist to that official.\n\nFor a principal (the entity employing the lobbyist), the limits are higher: **$50 per meal** with a yearly cap of **$250 per year**.\n\nThese limits are defined in \u00a7 36-25-1(34)b.16 and apply to \"meals and other food and beverages provided to a public official or public employee in a setting other than any of the above functions\" (that is, outside educational functions, economic development functions, work sessions, or widely attended events).\n\nImportantly, **the lobbyist's limits do not count against the principal's limits and vice versa** \u2014 each has its own separate cap.\n\nAny meals provided under these dollar limits are not considered a \"thing of value\" under the Ethics Law and thus fall outside the general prohibition on lobbyists giving things of value to public officials (\u00a7 36-25-5.1).\n"
+                }
+              }
+            ],
+            "cost_usd": 0.013631200000000001
+          }
+        ],
+        "sources_seen": [],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_all": true
+      },
+      "answer_text": "Under Alabama's Ethics Law, a lobbyist may spend up to **$25 per meal** on an elected official or public employee outside of an official event, with a yearly cap of **$150 per year** from that lobbyist to that official.\n\nFor a principal (the entity employing the lobbyist), the limits are higher: **$50 per meal** with a yearly cap of **$250 per year**.\n\nThese limits are defined in \u00a7 36-25-1(34)b.16 and apply to \"meals and other food and beverages provided to a public official or public employee in a setting other than any of the above functions\" (that is, outside educational functions, economic development functions, work sessions, or widely attended events).\n\nImportantly, **the lobbyist's limits do not count against the principal's limits and vice versa** \u2014 each has its own separate cap.\n\nAny meals provided under these dollar limits are not considered a \"thing of value\" under the Ethics Law and thus fall outside the general prohibition on lobbyists giving things of value to public officials (\u00a7 36-25-5.1).\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "ethics_law/36-25-1_definitions.md",
+        "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "rag_current",
+      "question_set": "hard",
+      "question_id": "hard-lobbyist-meal-limit",
+      "run": 1,
+      "latency_s": 6.100924251000151,
+      "n_calls": 3,
+      "input_tokens": 17710,
+      "output_tokens": 428,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.01985,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 0.8808393839999553,
+            "input_tokens": 2371,
+            "output_tokens": 49,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "lobbyist meal spending limit elected official ethics law"
+                }
+              }
+            ],
+            "cost_usd": 0.002616
+          },
+          {
+            "latency_s": 0.9138060390000646,
+            "input_tokens": 4901,
+            "output_tokens": 47,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "de minimis value ethics law definition amount"
+                }
+              }
+            ],
+            "cost_usd": 0.005136
+          },
+          {
+            "latency_s": 4.233006497000133,
+            "input_tokens": 10438,
+            "output_tokens": 332,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Under Alabama's Ethics Law, a lobbyist can provide meals to an elected official outside an official event, but only within specific limits. These are set out in \u00a7 36-25-1(34)(b)(16), which establishes a meal exception for lobbyists:\n\n- **Per-meal limit:** $25 per meal\n- **Annual cap:** $150 per year\n\nIf a **principal** (not a lobbyist) is providing the meal, the limits are higher:\n- **Per-meal limit:** $50 per meal  \n- **Annual cap:** $250 per year\n\nImportantly, these two sources (lobbyist and principal) do not count against each other\u2014an elected official could receive both a lobbyist's meals (up to $150/year) and a principal's meals (up to $250/year).\n\nAny meal exceeding these thresholds would constitute a prohibited \"thing of value\" under \u00a7 36-25-5.1(a), which bars lobbyists and principals from offering things of value to public officials. The de minimis exception under \u00a7 36-25-1(11) ($25 per occasion, $50 per year) does not override the specific meal limits in \u00a7 36-25-1(34)(b)(16)\u2014the statute treats meal-giving differently from other de minimis gifts."
+                }
+              }
+            ],
+            "cost_usd": 0.012098
+          }
+        ],
+        "sources_seen": [
+          "ethics_law/36-25-1_definitions.md",
+          "ethics_law/36-25-23_lobbying_during_term_of_office.md",
+          "ethics_law/36-25-29_appropriations.md",
+          "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+          "fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_all": true
+      },
+      "answer_text": "Under Alabama's Ethics Law, a lobbyist can provide meals to an elected official outside an official event, but only within specific limits. These are set out in \u00a7 36-25-1(34)(b)(16), which establishes a meal exception for lobbyists:\n\n- **Per-meal limit:** $25 per meal\n- **Annual cap:** $150 per year\n\nIf a **principal** (not a lobbyist) is providing the meal, the limits are higher:\n- **Per-meal limit:** $50 per meal  \n- **Annual cap:** $250 per year\n\nImportantly, these two sources (lobbyist and principal) do not count against each other\u2014an elected official could receive both a lobbyist's meals (up to $150/year) and a principal's meals (up to $250/year).\n\nAny meal exceeding these thresholds would constitute a prohibited \"thing of value\" under \u00a7 36-25-5.1(a), which bars lobbyists and principals from offering things of value to public officials. The de minimis exception under \u00a7 36-25-1(11) ($25 per occasion, $50 per year) does not override the specific meal limits in \u00a7 36-25-1(34)(b)(16)\u2014the statute treats meal-giving differently from other de minimis gifts.\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+        "ethics_law/36-25-23_lobbying_during_term_of_office.md",
+        "fcpa_statute/17-5-7_use_of_excess_moneys_solicitation.md",
+        "ethics_law/36-25-1_definitions.md",
+        "ethics_law/36-25-29_appropriations.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "glossary_inline",
+      "question_set": "hard",
+      "question_id": "hard-lobbyist-meal-limit",
+      "run": 1,
+      "latency_s": 5.389944852000099,
+      "n_calls": 3,
+      "input_tokens": 18025,
+      "output_tokens": 344,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.019745,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 0.9083886190001067,
+            "input_tokens": 3090,
+            "output_tokens": 50,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "lobbyist spending meal elected official ethics law limit cap"
+                }
+              }
+            ],
+            "cost_usd": 0.00334
+          },
+          {
+            "latency_s": 0.8308271479997984,
+            "input_tokens": 4650,
+            "output_tokens": 46,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "de minimis value definition Alabama ethics"
+                }
+              }
+            ],
+            "cost_usd": 0.00488
+          },
+          {
+            "latency_s": 3.57661562699991,
+            "input_tokens": 10285,
+            "output_tokens": 248,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Under Alabama's ethics law, a lobbyist may spend **up to $25 per meal** buying an elected official a meal outside of an official event, with an annual cap of **$150 per year**.\n\nThis appears in \u00a7 36-25-1(34)(b)(16), which defines what is not a \"thing of value\" (and therefore not prohibited by \u00a7 36-25-5.1). The statute specifically carves out \"meals and other food and beverages provided to a public official or public employee in a setting other than any of the above functions not to exceed for a lobbyist twenty-five dollars ($25) per meal with a limit of one hundred fifty dollars ($150) per year.\"\n\nNote that these limits apply only to lobbyists and their subordinates. Separate (higher) limits of $50 per meal and $250 per year apply to principals (the entities that employ lobbyists), and the two sets of limits do not count against each other."
+                }
+              }
+            ],
+            "cost_usd": 0.011525
+          }
+        ],
+        "sources_seen": [
+          "ethics_law/36-25-12_thing_of_value_regulatory_body.md",
+          "ethics_law/36-25-1_definitions.md",
+          "ethics_law/36-25-23_lobbying_during_term_of_office.md",
+          "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+          "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_all": true
+      },
+      "answer_text": "Under Alabama's ethics law, a lobbyist may spend **up to $25 per meal** buying an elected official a meal outside of an official event, with an annual cap of **$150 per year**.\n\nThis appears in \u00a7 36-25-1(34)(b)(16), which defines what is not a \"thing of value\" (and therefore not prohibited by \u00a7 36-25-5.1). The statute specifically carves out \"meals and other food and beverages provided to a public official or public employee in a setting other than any of the above functions not to exceed for a lobbyist twenty-five dollars ($25) per meal with a limit of one hundred fifty dollars ($150) per year.\"\n\nNote that these limits apply only to lobbyists and their subordinates. Separate (higher) limits of $50 per meal and $250 per year apply to principals (the entities that employ lobbyists), and the two sets of limits do not count against each other.\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+        "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+        "ethics_law/36-25-23_lobbying_during_term_of_office.md",
+        "ethics_law/36-25-1_definitions.md",
+        "ethics_law/36-25-12_thing_of_value_regulatory_body.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "hybrid",
+      "question_set": "hard",
+      "question_id": "hard-lobbyist-meal-limit",
+      "run": 1,
+      "latency_s": 5.987486978999868,
+      "n_calls": 3,
+      "input_tokens": 16100,
+      "output_tokens": 403,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.018115,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 0.9147462529999757,
+            "input_tokens": 2371,
+            "output_tokens": 50,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "lobbyist meal gift elected official limit cap ethics law"
+                }
+              }
+            ],
+            "cost_usd": 0.002621
+          },
+          {
+            "latency_s": 0.9505055270001321,
+            "input_tokens": 3931,
+            "output_tokens": 52,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_knowledge_base",
+                "input": {
+                  "query": "de minimis value definition Alabama ethics lobbyist gift meal amount"
+                }
+              }
+            ],
+            "cost_usd": 0.004191
+          },
+          {
+            "latency_s": 4.045240736000096,
+            "input_tokens": 9798,
+            "output_tokens": 301,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "search_knowledge_base",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Under Alabama ethics law, a lobbyist can spend on a meal for an elected official outside of an official event, but the amounts are specifically capped:\n\n**Per-meal limit:** $25 per meal  \n**Annual limit:** $150 per calendar year from the lobbyist\n\nHowever, there's an important distinction: these limits apply to a **lobbyist individually**. If a **principal** (the employer or entity that hired the lobbyist) pays for the meal instead, the limits are different: $50 per meal and $250 per year.\n\nImportantly, the lobbyist's limits and the principal's limits do not count against each other\u2014they are separate annual allowances under \u00a7 36-25-1(11) and (34)(b)(16).\n\nThe key requirement is that there can be no condition or expectation of influencing official action attached to the meal. Any meal given with the intent to \"corruptly influence official action\" violates \u00a7 36-25-7(a), regardless of dollar amount.\n\nThese limits are adjusted every four years (starting August 1, 2012) for inflation using the Consumer Price Index, so the current amounts may have been adjusted since the statute was enacted."
+                }
+              }
+            ],
+            "cost_usd": 0.011303
+          }
+        ],
+        "sources_seen": [
+          "ethics_law/36-25-1_definitions.md",
+          "ethics_law/36-25-23_lobbying_during_term_of_office.md",
+          "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+          "ethics_law/36-25-7_influencing_official_action.md",
+          "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md"
+        ],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_all": true
+      },
+      "answer_text": "Under Alabama ethics law, a lobbyist can spend on a meal for an elected official outside of an official event, but the amounts are specifically capped:\n\n**Per-meal limit:** $25 per meal  \n**Annual limit:** $150 per calendar year from the lobbyist\n\nHowever, there's an important distinction: these limits apply to a **lobbyist individually**. If a **principal** (the employer or entity that hired the lobbyist) pays for the meal instead, the limits are different: $50 per meal and $250 per year.\n\nImportantly, the lobbyist's limits and the principal's limits do not count against each other\u2014they are separate annual allowances under \u00a7 36-25-1(11) and (34)(b)(16).\n\nThe key requirement is that there can be no condition or expectation of influencing official action attached to the meal. Any meal given with the intent to \"corruptly influence official action\" violates \u00a7 36-25-7(a), regardless of dollar amount.\n\nThese limits are adjusted every four years (starting August 1, 2012) for inflation using the Consumer Price Index, so the current amounts may have been adjusted since the statute was enacted.\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "ethics_law/36-25-23_lobbying_during_term_of_office.md",
+        "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+        "fcpa_statute/17-5-15.1_limit_on_federal_funds_in_state_races.md",
+        "ethics_law/36-25-1_definitions.md",
+        "ethics_law/36-25-7_influencing_official_action.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    },
+    {
+      "strategy": "agentic_nav",
+      "question_set": "hard",
+      "question_id": "hard-lobbyist-meal-limit",
+      "run": 1,
+      "latency_s": 4.707805994999944,
+      "n_calls": 6,
+      "input_tokens": 18338,
+      "output_tokens": 251,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.019593,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 0.636408068000037,
+            "input_tokens": 2640,
+            "output_tokens": 21,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_categories",
+                "input": {}
+              }
+            ],
+            "cost_usd": 0.002745
+          },
+          {
+            "latency_s": 0.856339238999908,
+            "input_tokens": 2749,
+            "output_tokens": 44,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "lobbyist meal gift elected official"
+                }
+              }
+            ],
+            "cost_usd": 0.002969
+          },
+          {
+            "latency_s": 0.7507331409999551,
+            "input_tokens": 2833,
+            "output_tokens": 42,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "lobbyist spending meal"
+                }
+              }
+            ],
+            "cost_usd": 0.003043
+          },
+          {
+            "latency_s": 0.7450254620000578,
+            "input_tokens": 2913,
+            "output_tokens": 42,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "lobbyist gift limit"
+                }
+              }
+            ],
+            "cost_usd": 0.003123
+          },
+          {
+            "latency_s": 0.7555380260000675,
+            "input_tokens": 2993,
+            "output_tokens": 40,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_documents",
+                "input": {
+                  "category": "ethics_law"
+                }
+              }
+            ],
+            "cost_usd": 0.003193
+          },
+          {
+            "latency_s": 0.9496865339999658,
+            "input_tokens": 4210,
+            "output_tokens": 62,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "read_document",
+                "input": {
+                  "path": "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md"
+                }
+              }
+            ],
+            "cost_usd": 0.00452
+          }
+        ],
+        "sources_seen": [],
+        "search_hits": []
+      },
+      "error": null,
+      "passed": false,
+      "passed_content": false,
+      "checks": {
+        "answer_category": false,
+        "citations": false,
+        "text_contains_all": false
+      },
+      "answer_text": "I wasn't able to put together a complete answer to that - please try rephrasing or asking something more specific.",
+      "citations": [],
+      "refused": false,
+      "answer_category": "general",
+      "failure": "wandering (round budget exhausted)"
+    },
+    {
+      "strategy": "agentic_nav_10",
+      "question_set": "hard",
+      "question_id": "hard-lobbyist-meal-limit",
+      "run": 1,
+      "latency_s": 9.294648538000047,
+      "n_calls": 6,
+      "input_tokens": 31512,
+      "output_tokens": 634,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cost_usd": 0.034682,
+      "trace": {
+        "calls": [
+          {
+            "latency_s": 0.6521661540000423,
+            "input_tokens": 2640,
+            "output_tokens": 21,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_categories",
+                "input": {}
+              }
+            ],
+            "cost_usd": 0.002745
+          },
+          {
+            "latency_s": 0.7440993170000638,
+            "input_tokens": 2749,
+            "output_tokens": 40,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "list_documents",
+                "input": {
+                  "category": "ethics_law"
+                }
+              }
+            ],
+            "cost_usd": 0.002949
+          },
+          {
+            "latency_s": 1.3409209639999062,
+            "input_tokens": 4768,
+            "output_tokens": 105,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "read_document",
+                "input": {
+                  "path": "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md"
+                }
+              },
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "lobbyist meal gift value limit cap"
+                }
+              }
+            ],
+            "cost_usd": 0.005293
+          },
+          {
+            "latency_s": 0.8046092250001493,
+            "input_tokens": 5413,
+            "output_tokens": 41,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "search_text",
+                "input": {
+                  "query": "de minimis value"
+                }
+              }
+            ],
+            "cost_usd": 0.005618
+          },
+          {
+            "latency_s": 0.8561448640000435,
+            "input_tokens": 5617,
+            "output_tokens": 50,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "read_document",
+                "input": {
+                  "path": "ethics_law/36-25-1_definitions.md"
+                }
+              }
+            ],
+            "cost_usd": 0.005867
+          },
+          {
+            "latency_s": 4.886463605000017,
+            "input_tokens": 10325,
+            "output_tokens": 377,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "tools_offered": [
+              "list_categories",
+              "list_documents",
+              "read_document",
+              "search_text",
+              "get_contributions",
+              "get_expenditures",
+              "get_canvassing_log",
+              "get_filing_deadlines",
+              "decline_to_answer",
+              "provide_answer"
+            ],
+            "tool_calls": [
+              {
+                "name": "provide_answer",
+                "input": {
+                  "text": "Under Alabama's ethics law, a lobbyist is subject to specific limits on meal expenses for elected officials outside official events.\n\nPer \u00a7 36-25-1(34)(b)(16), meals and food/beverages provided by a **lobbyist** to a public official in a setting other than an educational function, economic development function, work session, or widely attended event are limited to:\n\n- **$25 per meal**\n- **$150 per calendar year**\n\nAdditionally, \u00a7 36-25-5.1(a) prohibits lobbyists from offering or providing \"a thing of value\" to public officials or their family members, with the exception that they may offer or provide items of **de minimis value**. De minimis is defined in \u00a7 36-25-1(11) as $25 or less per occasion and an aggregate of $50 or less per calendar year from any single provider.\n\nHowever, the meal limits in \u00a7 36-25-1(34)(b)(16) are the specific exception that applies to meals, and those limits ($25 per meal, $150/year for a lobbyist) are **higher than the general de minimis threshold**\u2014so the meal-specific limits control for meal expenses.\n\nNote that these limits apply to registered lobbyists. A principal (the entity that hires a lobbyist) has separate, higher limits: $50 per meal with a $250 per year cap. The statute specifies that a lobbyist's limits and a principal's limits do not count against each other.\n"
+                }
+              }
+            ],
+            "cost_usd": 0.01221
+          }
+        ],
+        "sources_seen": [
+          "ethics_law/36-25-1_definitions.md",
+          "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md"
+        ],
+        "search_hits": [
+          "ethics_law/36-25-1_definitions.md",
+          "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md"
+        ]
+      },
+      "error": null,
+      "passed": true,
+      "passed_content": true,
+      "checks": {
+        "answer_category": true,
+        "citations": true,
+        "text_contains_all": true
+      },
+      "answer_text": "Under Alabama's ethics law, a lobbyist is subject to specific limits on meal expenses for elected officials outside official events.\n\nPer \u00a7 36-25-1(34)(b)(16), meals and food/beverages provided by a **lobbyist** to a public official in a setting other than an educational function, economic development function, work session, or widely attended event are limited to:\n\n- **$25 per meal**\n- **$150 per calendar year**\n\nAdditionally, \u00a7 36-25-5.1(a) prohibits lobbyists from offering or providing \"a thing of value\" to public officials or their family members, with the exception that they may offer or provide items of **de minimis value**. De minimis is defined in \u00a7 36-25-1(11) as $25 or less per occasion and an aggregate of $50 or less per calendar year from any single provider.\n\nHowever, the meal limits in \u00a7 36-25-1(34)(b)(16) are the specific exception that applies to meals, and those limits ($25 per meal, $150/year for a lobbyist) are **higher than the general de minimis threshold**\u2014so the meal-specific limits control for meal expenses.\n\nNote that these limits apply to registered lobbyists. A principal (the entity that hires a lobbyist) has separate, higher limits: $50 per meal with a $250 per year cap. The statute specifies that a lobbyist's limits and a principal's limits do not count against each other.\n\n\n*This is general information about Alabama campaign-finance law, not legal advice. For guidance on your specific situation, consult your campaign's attorney or compliance officer.*",
+      "citations": [
+        "ethics_law/36-25-5.1_lobbyist_thing_of_value_ban.md",
+        "ethics_law/36-25-1_definitions.md"
+      ],
+      "refused": false,
+      "answer_category": "compliance",
+      "failure": null
+    }
+  ],
+  "full_run_estimate": {
+    "rag_current": {
+      "per_question_usd": 0.015186999999999999,
+      "total_usd": 1.549074
+    },
+    "long_context": {
+      "per_question_usd": 0.013631200000000001,
+      "total_usd": 1.7664273000000001
+    },
+    "agentic_nav": {
+      "per_question_usd": 0.022054,
+      "total_usd": 2.249508
+    },
+    "agentic_nav_10": {
+      "per_question_usd": 0.027792499999999998,
+      "total_usd": 2.834835
+    },
+    "hybrid": {
+      "per_question_usd": 0.027626,
+      "total_usd": 2.8178520000000002
+    },
+    "glossary_inline": {
+      "per_question_usd": 0.016036,
+      "total_usd": 1.635672
+    },
+    "long_context_cold_probe": {
+      "total_usd": 0.4177635
+    },
+    "TOTAL": {
+      "total_usd": 13.271131800000001
+    }
+  }
+}

@@ -8,7 +8,9 @@ function's signature or return shape.
 """
 
 import json
+import os
 from dataclasses import dataclass, field
+from typing import Callable
 
 import anthropic
 
@@ -264,6 +266,8 @@ FINISH_TOOLS = [DECLINE_TOOL, PROVIDE_ANSWER_TOOL]
 
 MAX_TOOL_ROUNDS = 5
 
+DEFAULT_STRATEGY = "rag_current"
+
 
 @dataclass
 class AssistantAnswer:
@@ -290,6 +294,64 @@ def _get_client() -> anthropic.Anthropic:
     if _client is None:
         _client = anthropic.Anthropic()
     return _client
+
+
+def format_passages(passages) -> str:
+    """The tool-result text for a list of retrieved Passages."""
+    return "\n\n".join(
+        f"[{p.source}]"
+        + (f"\nKnown issue: {p.flag}" if p.flag else "")
+        + f"\n{p.text}"
+        for p in passages
+    )
+
+
+class RagCurrent:
+    """Today's retrieval: embedding search via search_knowledge_base.
+
+    This is the default strategy and the reference shape every other
+    strategy in `assistant.retrieval_strategies` follows: the orchestrator
+    loop asks it for the system prompt and tool lists, hands it every
+    non-data, non-terminal tool call, and lets it adjust the citations on
+    the final answer. Everything else (safety, data tools, terminal tools,
+    round budget, answer shaping) stays in `handle_question`.
+    """
+
+    name = "rag_current"
+    max_tool_rounds = MAX_TOOL_ROUNDS
+
+    def __init__(self, get_knowledge_base: Callable[[], KnowledgeBase]):
+        self._get_knowledge_base = get_knowledge_base
+
+    def system(self, base_system: str):
+        return base_system
+
+    def tools(self) -> list[dict]:
+        return ALL_TOOLS
+
+    def finish_tools(self) -> list[dict]:
+        return FINISH_TOOLS
+
+    def handle_tool(self, name: str, tool_input: dict) -> tuple[str, list[str]]:
+        """Run a knowledge tool; return (tool-result text, sources it surfaced)."""
+        passages = self._get_knowledge_base().search(tool_input["query"])
+        return format_passages(passages), [p.source for p in passages]
+
+    def final_citations(self, citations: list[str], answer_text: str) -> list[str]:
+        return citations
+
+
+def _resolve_strategy(strategy, get_knowledge_base):
+    if strategy is not None and not isinstance(strategy, str):
+        return strategy  # already a strategy object (tests / experiments)
+    name = strategy or os.environ.get("RETRIEVAL_STRATEGY") or DEFAULT_STRATEGY
+    if name == "rag_current":
+        return RagCurrent(get_knowledge_base)
+    # Experimental strategies live in their own module so the default path
+    # never imports their extra dependencies.
+    from assistant.retrieval_strategies import build_strategy
+
+    return build_strategy(name, get_knowledge_base)
 
 
 def _build_final_answer(
@@ -328,14 +390,22 @@ def handle_question(
     campaign_context: dict,
     client: anthropic.Anthropic | None = None,
     knowledge_base: KnowledgeBase | None = None,
+    strategy: str | None = None,
 ) -> AssistantAnswer:
+    """`strategy` selects how law/glossary/how-to knowledge reaches the
+    model (see `assistant.retrieval_strategies`). It defaults to the
+    RETRIEVAL_STRATEGY env var, then to "rag_current" - today's behaviour.
+    """
     client = client or _get_client()
+    strategy = _resolve_strategy(
+        strategy, lambda: knowledge_base or _get_knowledge_base()
+    )
     question, pii_found = redact_pii(question)
 
     if detect_prompt_injection(question):
         return _build_final_answer("declined", "prompt_injection", [], pii_found)
 
-    system = SYSTEM_PROMPT_TEMPLATE.format(
+    base_system = SYSTEM_PROMPT_TEMPLATE.format(
         state=campaign_context.get("state", "Alabama"),
         office=campaign_context.get("office", "Mayoral"),
         campaign_name=campaign_context.get("campaign_name", "the campaign"),
@@ -344,17 +414,18 @@ def handle_question(
         election_date=campaign_context.get("election_date", "TBD"),
         as_of_date=campaign_context.get("as_of_date", "unknown"),
     )
+    system = strategy.system(base_system)
     messages = [
         {"role": "user", "content": f"<user_message>\n{question}\n</user_message>"}
     ]
     citations: list[str] = []
 
-    for _ in range(MAX_TOOL_ROUNDS):
+    for _ in range(strategy.max_tool_rounds):
         response = client.messages.create(
             model=MODEL,
             max_tokens=1024,
             system=system,
-            tools=ALL_TOOLS,
+            tools=strategy.tools(),
             tool_choice={"type": "any"},
             messages=messages,
         )
@@ -375,6 +446,8 @@ def handle_question(
 
         if terminal is not None:
             kind, payload = terminal
+            if kind == "answered":
+                citations = strategy.final_citations(citations, payload)
             return _build_final_answer(kind, payload, citations, pii_found)
 
         messages.append({"role": "assistant", "content": response.content})
@@ -382,20 +455,13 @@ def handle_question(
         for block in response.content:
             if block.type != "tool_use":
                 continue
-            if block.name == "search_knowledge_base":
-                knowledge_base = knowledge_base or _get_knowledge_base()
-                passages = knowledge_base.search(block.input["query"])
-                citations.extend(
-                    p.source for p in passages if p.source not in citations
-                )
-                content = "\n\n".join(
-                    f"[{p.source}]"
-                    + (f"\nKnown issue: {p.flag}" if p.flag else "")
-                    + f"\n{p.text}"
-                    for p in passages
-                )
-            else:
+            if block.name in DATA_TOOLS:
                 content = json.dumps(DATA_TOOLS[block.name](block.input))
+            else:
+                content, sources = strategy.handle_tool(block.name, block.input)
+                citations.extend(
+                    src for src in dict.fromkeys(sources) if src not in citations
+                )
             tool_results.append(
                 {
                     "type": "tool_result",
@@ -414,7 +480,7 @@ def handle_question(
         model=MODEL,
         max_tokens=1024,
         system=system,
-        tools=FINISH_TOOLS,
+        tools=strategy.finish_tools(),
         tool_choice={"type": "any"},
         messages=messages,
     )
@@ -429,8 +495,12 @@ def handle_question(
                 pii_found,
             )
         if block.name == "provide_answer":
+            text = block.input.get("text", "")
             return _build_final_answer(
-                "answered", block.input.get("text", ""), citations, pii_found
+                "answered",
+                text,
+                strategy.final_citations(citations, text),
+                pii_found,
             )
 
     return _build_final_answer(
